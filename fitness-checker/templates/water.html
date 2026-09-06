@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Water Tracker | Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+            <p class="eyebrow">FITNESS CHECKER</p>
+
+            <h1>Water Tracker</h1>
+
+            <p class="dashboard-subtitle">
+                Keep track of your daily hydration.
+            </p>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">DAILY TARGET</p>
+
+        <h2>STAY HYDRATED</h2>
+
+        {% if water_target %}
+
+            <div class="bmi-display">
+                <strong>{{ water_target }} L</strong>
+            </div>
+
+            <p>
+                Based on your latest assessment, your approximate
+                daily water target is <strong>{{ water_target }} litres</strong>.
+            </p>
+
+        {% else %}
+
+            <p>
+                Create a fitness assessment first so we can
+                calculate an approximate water target.
+            </p>
+
+            <a href="{{ url_for('plan') }}" class="btn">
+                Create Assessment
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">HYDRATION GUIDE</p>
+
+        <h2>MAKE WATER A HABIT</h2>
+
+        <div class="recommendation-grid">
+
+            <div>
+                <span>🌅</span>
+
+                <h3>MORNING</h3>
+
+                <p>
+                    Start your day with a glass of water.
+                </p>
+            </div>
+
+
+            <div>
+                <span>🏃</span>
+
+                <h3>ACTIVITY</h3>
+
+                <p>
+                    Drink water before, during, and after exercise.
+                </p>
+            </div>
+
+
+            <div>
+                <span>🌙</span>
+
+                <h3>EVENING</h3>
+
+                <p>
+                    Keep hydrated throughout the day rather than
+                    drinking everything at once.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">REMEMBER</p>
+
+        <h2>LISTEN TO YOUR BODY</h2>
+
+        <p>
+            Your water needs can change depending on activity,
+            weather, diet, and other factors. Use the target as
+            a general guide rather than a strict medical rule.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

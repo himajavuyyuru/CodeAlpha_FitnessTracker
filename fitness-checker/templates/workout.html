@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Workout Plan | Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+        <div>
+            <p class="eyebrow">FITNESS CHECKER</p>
+
+            <h1>Workout Plan</h1>
+
+            <p class="dashboard-subtitle">
+                Build consistency with a simple weekly routine.
+            </p>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn">
+            Back to Dashboard
+        </a>
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">YOUR ROUTINE</p>
+
+        <h2>{{ goal|capitalize }} Workout</h2>
+
+        <p>
+            Follow this weekly routine and adjust the intensity
+            based on your fitness level.
+        </p>
+
+    </div>
+
+
+    <div class="recommendation-grid">
+
+        {% for day in workouts %}
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">
+                {{ day.day }}
+            </p>
+
+            <h2>
+                {{ day.name }}
+            </h2>
+
+            <ul>
+                {% for exercise in day.exercises %}
+                <li>{{ exercise }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

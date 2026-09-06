@@ -1,0 +1,488 @@
+{% extends "base.html" %}
+
+{% block title %}Progress | Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <p class="eyebrow">
+                FITNESS CHECKER
+            </p>
+
+            <h1>
+                My Progress
+            </h1>
+
+            <p class="dashboard-subtitle">
+                Track your daily activity and fitness assessments.
+            </p>
+
+        </div>
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="btn"
+        >
+            Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- DAILY ACTIVITY -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">
+            TODAY
+        </p>
+
+        <h2>
+            Daily Activity
+        </h2>
+
+        <div class="metric-grid">
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    STEPS
+                </span>
+
+                <strong class="metric-value">
+                    {{ today_steps }}
+                </strong>
+
+                <span class="metric-small">
+                    / 10,000
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    WORKOUT
+                </span>
+
+                <strong class="metric-value">
+                    {{ today_duration }}
+                </strong>
+
+                <span class="metric-small">
+                    / 30 minutes
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    CALORIES
+                </span>
+
+                <strong class="metric-value">
+                    {{ today_calories }}
+                </strong>
+
+                <span class="metric-small">
+                    / 500 kcal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <p>
+            Steps Progress: {{ step_progress }}%
+        </p>
+
+        <progress
+            value="{{ step_progress }}"
+            max="100"
+            style="width:100%;"
+        ></progress>
+
+
+        <p>
+            Workout Progress: {{ workout_progress }}%
+        </p>
+
+        <progress
+            value="{{ workout_progress }}"
+            max="100"
+            style="width:100%;"
+        ></progress>
+
+
+        <p>
+            Calories Progress: {{ calorie_progress }}%
+        </p>
+
+        <progress
+            value="{{ calorie_progress }}"
+            max="100"
+            style="width:100%;"
+        ></progress>
+
+    </div>
+
+
+    <!-- WEEKLY SUMMARY -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">
+            LAST 7 DAYS
+        </p>
+
+        <h2>
+            Weekly Progress
+        </h2>
+
+        <div class="metric-grid">
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    TOTAL STEPS
+                </span>
+
+                <strong class="metric-value">
+                    {{ weekly_steps }}
+                </strong>
+
+                <span class="metric-small">
+                    steps
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    WORKOUT TIME
+                </span>
+
+                <strong class="metric-value">
+                    {{ weekly_duration }}
+                </strong>
+
+                <span class="metric-small">
+                    minutes
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    CALORIES BURNED
+                </span>
+
+                <strong class="metric-value">
+                    {{ weekly_calories }}
+                </strong>
+
+                <span class="metric-small">
+                    kcal
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FITNESS ACTIVITY HISTORY -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">
+            ACTIVITY HISTORY
+        </p>
+
+        <h2>
+            Your Fitness Activities
+        </h2>
+
+        {% if activities %}
+
+            <div class="assessment-history">
+
+                {% for activity in activities %}
+
+                <div class="assessment-row">
+
+                    <div>
+
+                        <strong>
+                            {{ activity.date.strftime('%d %b %Y') }}
+                        </strong>
+
+                        <span>
+                            {{ activity.workout_type }}
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ activity.steps }}
+                        </strong>
+
+                        <span>
+                            steps
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ activity.duration }} min
+                        </strong>
+
+                        <span>
+                            workout
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ activity.calories_burned }}
+                        </strong>
+
+                        <span>
+                            kcal
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <p>
+                No fitness activities have been logged yet.
+            </p>
+
+            <a
+                href="{{ url_for('fitness_activity') }}"
+                class="btn"
+            >
+                Log Activity
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ASSESSMENT PROGRESS -->
+
+    {% if assessments %}
+
+        <div class="metric-grid">
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    LATEST WEIGHT
+                </span>
+
+                <strong class="metric-value">
+                    {{ assessments[0].weight }}
+                </strong>
+
+                <span class="metric-small">
+                    kg
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    LATEST BMI
+                </span>
+
+                <strong class="metric-value">
+                    {{ assessments[0].bmi }}
+                </strong>
+
+                <span class="metric-small">
+                    BMI
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    ASSESSMENTS
+                </span>
+
+                <strong class="metric-value">
+                    {{ assessments|length }}
+                </strong>
+
+                <span class="metric-small">
+                    completed
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    CALORIES
+                </span>
+
+                <strong class="metric-value">
+                    {{ assessments[0].calories }}
+                </strong>
+
+                <span class="metric-small">
+                    kcal / day
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ASSESSMENT HISTORY -->
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">
+                ASSESSMENT HISTORY
+            </p>
+
+            <h2>
+                Your Assessments
+            </h2>
+
+            <div class="assessment-history">
+
+                {% for assessment in assessments %}
+
+                <div class="assessment-row">
+
+                    <div>
+
+                        <strong>
+                            {{ assessment.created_at.strftime('%d %b %Y') }}
+                        </strong>
+
+                        <span>
+                            {{ assessment.activity|capitalize }} activity
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ assessment.weight }} kg
+                        </strong>
+
+                        <span>
+                            Weight
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ assessment.bmi }}
+                        </strong>
+
+                        <span>
+                            BMI
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ assessment.calories }}
+                        </strong>
+
+                        <span>
+                            kcal/day
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- ACTION -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">
+            KEEP GOING
+        </p>
+
+        <h2>
+            Consistency Matters
+        </h2>
+
+        <p>
+            Continue logging your daily activities and completing
+            fitness assessments to build a complete picture of
+            your progress.
+        </p>
+
+        <a
+            href="{{ url_for('fitness_activity') }}"
+            class="btn"
+        >
+            Log Activity
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

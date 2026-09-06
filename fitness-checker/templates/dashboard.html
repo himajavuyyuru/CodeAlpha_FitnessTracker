@@ -1,0 +1,610 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+            <p class="eyebrow">YOUR FITNESS SPACE</p>
+
+            <h1>
+                Welcome back,
+                {{ current_user.name }} 👋
+            </h1>
+
+            <p class="dashboard-subtitle">
+                Here's your latest fitness overview.
+            </p>
+        </div>
+
+        <a href="{{ url_for('plan') }}" class="btn">
+            Create New Plan
+        </a>
+
+    </div>
+
+
+    {% if latest %}
+
+    <!-- METRICS -->
+
+    <div class="metric-grid">
+
+        <div class="metric-card">
+
+            <span class="metric-label">
+                BMI
+            </span>
+
+            <strong class="metric-value">
+                {{ latest.bmi }}
+            </strong>
+
+            <span class="metric-small">
+                {{ bmi_category }}
+            </span>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <span class="metric-label">
+                DAILY CALORIES
+            </span>
+
+            <strong class="metric-value">
+                {{ latest.calories }}
+            </strong>
+
+            <span class="metric-small">
+                kcal / day
+            </span>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <span class="metric-label">
+                CURRENT WEIGHT
+            </span>
+
+            <strong class="metric-value">
+                {{ latest.weight }}
+            </strong>
+
+            <span class="metric-small">
+                kg
+            </span>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <span class="metric-label">
+                WATER TARGET
+            </span>
+
+            <strong class="metric-value">
+                {{ water }}
+            </strong>
+
+            <span class="metric-small">
+                litres / day
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- DAILY ACTIVITY -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">TODAY'S ACTIVITY</p>
+
+        <h2>Daily Fitness Progress</h2>
+
+        <div class="metric-grid">
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    STEPS
+                </span>
+
+                <strong class="metric-value">
+                    {{ today_steps }}
+                </strong>
+
+                <span class="metric-small">
+                    / 10,000 steps
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    WORKOUT
+                </span>
+
+                <strong class="metric-value">
+                    {{ today_duration }}
+                </strong>
+
+                <span class="metric-small">
+                    / 30 minutes
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    CALORIES BURNED
+                </span>
+
+                <strong class="metric-value">
+                    {{ today_calories }}
+                </strong>
+
+                <span class="metric-small">
+                    / 500 kcal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEPS PROGRESS -->
+
+        <p>
+            Steps Progress: {{ step_progress }}%
+        </p>
+
+        <progress
+            value="{{ step_progress }}"
+            max="100"
+            style="width:100%;"
+        ></progress>
+
+
+        <!-- WORKOUT PROGRESS -->
+
+        <p>
+            Workout Progress: {{ workout_progress }}%
+        </p>
+
+        <progress
+            value="{{ workout_progress }}"
+            max="100"
+            style="width:100%;"
+        ></progress>
+
+
+        <!-- CALORIES PROGRESS -->
+
+        <p>
+            Calories Progress: {{ calorie_progress }}%
+        </p>
+
+        <progress
+            value="{{ calorie_progress }}"
+            max="100"
+            style="width:100%;"
+        ></progress>
+
+        <br>
+
+        <a
+            href="{{ url_for('fitness_activity') }}"
+            class="btn"
+        >
+            Log Today's Activity
+        </a>
+
+    </div>
+
+
+    <!-- WEEKLY SUMMARY -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">LAST 7 DAYS</p>
+
+        <h2>Weekly Activity Summary</h2>
+
+        <div class="metric-grid">
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    TOTAL STEPS
+                </span>
+
+                <strong class="metric-value">
+                    {{ weekly_steps }}
+                </strong>
+
+                <span class="metric-small">
+                    steps
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    WORKOUT TIME
+                </span>
+
+                <strong class="metric-value">
+                    {{ weekly_duration }}
+                </strong>
+
+                <span class="metric-small">
+                    minutes
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    CALORIES BURNED
+                </span>
+
+                <strong class="metric-value">
+                    {{ weekly_calories }}
+                </strong>
+
+                <span class="metric-small">
+                    kcal
+                </span>
+
+            </div>
+
+        </div>
+
+        <a
+            href="{{ url_for('progress') }}"
+            class="btn"
+        >
+            View Full Progress
+        </a>
+
+    </div>
+
+
+    <!-- FITNESS SUMMARY -->
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">
+                FITNESS SUMMARY
+            </p>
+
+            <h2>Your latest assessment</h2>
+
+            <div class="summary-list">
+
+                <div>
+                    <span>Age</span>
+                    <strong>{{ latest.age }}</strong>
+                </div>
+
+                <div>
+                    <span>Height</span>
+                    <strong>{{ latest.height }} cm</strong>
+                </div>
+
+                <div>
+                    <span>Weight</span>
+                    <strong>{{ latest.weight }} kg</strong>
+                </div>
+
+                <div>
+                    <span>Activity</span>
+                    <strong>{{ latest.activity|capitalize }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">
+                BMI STATUS
+            </p>
+
+            <h2>{{ bmi_category }}</h2>
+
+            <div class="bmi-display">
+
+                <strong>
+                    {{ latest.bmi }}
+                </strong>
+
+            </div>
+
+            <p>
+                Your BMI is calculated from your latest
+                height and weight assessment.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECOMMENDATIONS -->
+
+    <div class="dashboard-card recommendations">
+
+        <p class="eyebrow">
+            YOUR NEXT STEPS
+        </p>
+
+        <h2>Simple habits for today</h2>
+
+        <div class="recommendation-grid">
+
+            <div>
+
+                <span>🏃</span>
+
+                <h3>MOVE</h3>
+
+                <p>
+                    Stay active today with a walk,
+                    workout, or another activity you enjoy.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>🥗</span>
+
+                <h3>EAT</h3>
+
+                <p>
+                    Focus on balanced meals with
+                    vegetables, protein, and whole foods.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>💧</span>
+
+                <h3>HYDRATE</h3>
+
+                <p>
+                    Aim for approximately
+                    {{ water }} litres of water today.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ASSESSMENT HISTORY -->
+
+    <div class="dashboard-card">
+
+        <div class="history-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    PROGRESS
+                </p>
+
+                <h2>
+                    Assessment history
+                </h2>
+
+            </div>
+
+            <span>
+                {{ assessments|length }}
+                assessment{% if assessments|length != 1 %}s{% endif %}
+            </span>
+
+        </div>
+
+
+        <div class="assessment-history">
+
+            {% for assessment in assessments %}
+
+            <div class="assessment-row">
+
+                <div>
+
+                    <strong>
+                        {{ assessment.created_at.strftime('%d %b %Y') }}
+                    </strong>
+
+                    <span>
+                        {{ assessment.activity|capitalize }} activity
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ assessment.weight }} kg
+                    </strong>
+
+                    <span>
+                        BMI {{ assessment.bmi }}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ assessment.calories }}
+                    </strong>
+
+                    <span>
+                        kcal/day
+                    </span>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT ACTIVITY -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">
+            FITNESS ACTIVITY
+        </p>
+
+        <h2>Recent Activity</h2>
+
+        {% if activities %}
+
+            <div class="assessment-history">
+
+                {% for activity in activities[:5] %}
+
+                <div class="assessment-row">
+
+                    <div>
+
+                        <strong>
+                            {{ activity.date.strftime('%d %b %Y') }}
+                        </strong>
+
+                        <span>
+                            {{ activity.workout_type }}
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ activity.steps }}
+                        </strong>
+
+                        <span>
+                            steps
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ activity.duration }} min
+                        </strong>
+
+                        <span>
+                            {{ activity.calories_burned }} kcal
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <p>
+                No fitness activities logged yet.
+            </p>
+
+            <a
+                href="{{ url_for('fitness_activity') }}"
+                class="btn"
+            >
+                Log Your First Activity
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+    {% else %}
+
+    <!-- EMPTY DASHBOARD -->
+
+    <div class="dashboard-card empty-dashboard">
+
+        <div class="empty-icon">
+            🏋️
+        </div>
+
+        <p class="eyebrow">
+            LET'S GET STARTED
+        </p>
+
+        <h2>
+            Create your first fitness assessment
+        </h2>
+
+        <p>
+            Enter your fitness details and we'll calculate
+            your BMI and estimated daily calorie needs.
+        </p>
+
+        <a
+            href="{{ url_for('plan') }}"
+            class="btn"
+        >
+            Create My Plan
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

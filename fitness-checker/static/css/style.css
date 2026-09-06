@@ -1,0 +1,643 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --paper: #F1F3EC;
+  --panel: #E7EBDF;
+  --ink: #16241C;
+  --ink-soft: #4A5A4E;
+  --line: #C9D0C2;
+  --green: #2F6F4E;
+  --ember: #D65A2E;
+
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "Work Sans", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 0.5em;
+  letter-spacing: 0.2px;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); }
+h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+h3 { font-size: 1.25rem; font-family: var(--font-body); font-weight: 600; }
+
+p { margin: 0 0 1em; color: var(--ink-soft); max-width: 62ch; }
+
+a { color: inherit; }
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: #fff;
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.btn-text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 10;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.main-nav .nav-login { color: var(--ink-soft); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  display: block;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 72px 24px 40px;
+}
+
+.hero-text { max-width: 640px; }
+
+.hero-sub { font-size: 1.1rem; }
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Scoreboard ---------- */
+.scoreboard {
+  padding: 32px 24px 48px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 32px;
+  border-left: 1px solid var(--line);
+}
+
+.stat:first-child { border-left: none; padding-left: 0; }
+
+.stat-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.6rem;
+  color: var(--green);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 6px;
+}
+
+.scoreboard-note {
+  width: 100%;
+  margin: 20px 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- How it works ---------- */
+.how { padding: 64px 24px; }
+
+.steps {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+}
+
+.steps li {
+  display: flex;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+
+.step-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--ember);
+  min-width: 48px;
+}
+
+.steps h3 { margin-bottom: 0.3em; }
+.steps p { margin-bottom: 0; }
+
+/* ---------- Features ---------- */
+.features { padding: 24px 24px 64px; }
+
+.feature-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+}
+
+.feature-list li {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.feature-list li:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+
+/* ---------- Final CTA ---------- */
+.cta-final {
+  padding: 64px 24px 96px;
+  text-align: left;
+}
+
+.cta-final h2 { max-width: 20ch; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+}
+
+.site-footer p {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .main-nav { display: none; }
+  .nav-toggle { display: flex; }
+
+  .main-nav.is-open {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .main-nav.is-open a {
+    width: 100%;
+    padding: 16px 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .feature-list { grid-template-columns: 1fr; }
+
+  .stat { padding: 8px 20px; }
+}
+/* =========================================================
+   FITNESS CHECKER - DASHBOARD
+   ========================================================= */
+
+.dashboard {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 60px 0 90px;
+}
+
+
+/* ---------------- DASHBOARD HEADER ---------------- */
+
+.dashboard-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 45px;
+}
+
+.dashboard-header h1 {
+    margin: 8px 0 10px;
+    font-family: "Big Shoulders Display", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.dashboard-subtitle {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 1rem;
+}
+
+
+/* ---------------- EYEBROW ---------------- */
+
+.eyebrow {
+    margin: 0;
+    color: var(--green);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+
+/* ---------------- METRIC CARDS ---------------- */
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.metric-card {
+    min-height: 175px;
+    padding: 25px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.metric-label {
+    color: var(--ink-soft);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.metric-value {
+    display: block;
+    margin: 15px 0 5px;
+    font-family: "Big Shoulders Display", sans-serif;
+    font-size: 3.5rem;
+    line-height: 1;
+}
+
+.metric-small {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+}
+
+
+/* ---------------- DASHBOARD GRID ---------------- */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard-card {
+    padding: 32px;
+    margin-bottom: 20px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+}
+
+.dashboard-card h2 {
+    margin: 8px 0 25px;
+    font-family: "Big Shoulders Display", sans-serif;
+    font-size: 2.1rem;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+
+/* ---------------- SUMMARY ---------------- */
+
+.summary-list {
+    border-top: 1px solid var(--line);
+}
+
+.summary-list > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.summary-list span {
+    color: var(--ink-soft);
+}
+
+.summary-list strong {
+    font-weight: 700;
+}
+
+
+/* ---------------- BMI ---------------- */
+
+.bmi-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    margin-bottom: 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+}
+
+.bmi-display strong {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+}
+
+.dashboard-card > p:not(.eyebrow) {
+    color: var(--ink-soft);
+    line-height: 1.7;
+}
+
+
+/* ---------------- RECOMMENDATIONS ---------------- */
+
+.recommendations {
+    margin-bottom: 20px;
+}
+
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.recommendation-grid > div {
+    padding: 25px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+}
+
+.recommendation-grid span {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 2rem;
+}
+
+.recommendation-grid h3 {
+    margin: 0 0 10px;
+    font-family: "Big Shoulders Display", sans-serif;
+    font-size: 1.5rem;
+}
+
+.recommendation-grid p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+
+/* ---------------- HISTORY ---------------- */
+
+.history-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.history-header h2 {
+    margin-bottom: 0;
+}
+
+.history-header > span {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+}
+
+.assessment-history {
+    border-top: 1px solid var(--line);
+}
+
+.assessment-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.assessment-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.assessment-row > div:not(:first-child) {
+    text-align: right;
+}
+
+.assessment-row span {
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+}
+
+
+/* ---------------- EMPTY DASHBOARD ---------------- */
+
+.empty-dashboard {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.empty-dashboard h2 {
+    max-width: 600px;
+    margin-bottom: 15px;
+}
+
+.empty-dashboard > p:not(.eyebrow) {
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+.empty-icon {
+    margin-bottom: 20px;
+    font-size: 4rem;
+}
+
+
+/* ---------------- DASHBOARD BUTTON ---------------- */
+
+.dashboard .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 25px;
+    text-decoration: none;
+}
+
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 900px) {
+
+    .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .recommendation-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .dashboard {
+        padding-top: 40px;
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dashboard-header .btn {
+        width: 100%;
+    }
+
+    .metric-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-card {
+        min-height: 150px;
+    }
+
+    .dashboard-card {
+        padding: 22px;
+    }
+
+    .assessment-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .assessment-row > div:not(:first-child) {
+        text-align: left;
+    }
+
+    .history-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}

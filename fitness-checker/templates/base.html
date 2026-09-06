@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Fitness Checker{% endblock %}
+    </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="site-header">
+
+        <div class="container nav-container">
+
+            <!-- Logo -->
+
+            <a href="{{ url_for('index') }}" class="logo">
+                FITNESS CHECKER
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav class="main-nav">
+
+                {% if current_user.is_authenticated %}
+
+                    <a href="{{ url_for('dashboard') }}">
+    Dashboard
+</a>
+
+<a href="{{ url_for('plan') }}">
+    Create Plan
+</a>
+<a href="{{ url_for('fitness_activity') }}">
+  Log Activity
+</a>
+<a href="{{ url_for('workout') }}">
+    Workout
+</a>
+ <a href="{{ url_for('nutrition') }}">
+    Nutrition
+</a>
+<a href="{{ url_for('water') }}">
+    Water
+</a>
+<a href="{{ url_for('progress') }}">
+    Progress
+</a>
+<a href="{{ url_for('profile') }}">
+    Profile
+</a>
+<a href="{{ url_for('logout') }}">
+    Log out
+</a>
+
+                {% else %}
+
+                    <a href="{{ url_for('index') }}">
+                        How it works
+                    </a>
+
+                    <a href="{{ url_for('login') }}">
+                        Log in
+                    </a>
+
+                    <a href="{{ url_for('signup') }}">
+                        Sign up
+                    </a>
+
+                {% endif %}
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= FLASH MESSAGES ================= -->
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            <div class="flash-container">
+
+                {% for message in messages %}
+
+                    <div class="flash-message">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 Fitness Checker
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Main JavaScript -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}">
+    </script>
+
+</body>
+
+</html>

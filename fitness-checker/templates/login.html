@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Log In - Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <h1>Log In</h1>
+
+    <p>Welcome back to Fitness Checker.</p>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p><strong>{{ message }}</strong></p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+
+        <label for="email">Email</label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <br><br>
+
+        <label for="password">Password</label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit" class="btn btn-primary">
+            Log In
+        </button>
+
+    </form>
+
+    <p>
+        Don't have an account?
+        <a href="{{ url_for('signup') }}">Sign up</a>
+    </p>
+
+</section>
+
+{% endblock %}

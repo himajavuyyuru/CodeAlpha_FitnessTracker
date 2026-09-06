@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Profile | Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+            <p class="eyebrow">FITNESS CHECKER</p>
+
+            <h1>My Profile</h1>
+
+            <p class="dashboard-subtitle">
+                View your Fitness Checker account details.
+            </p>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">ACCOUNT INFORMATION</p>
+
+        <h2>YOUR DETAILS</h2>
+
+        <div class="summary-list">
+
+            <div>
+                <span>Name</span>
+                <strong>{{ current_user.name }}</strong>
+            </div>
+
+            <div>
+                <span>Email</span>
+                <strong>{{ current_user.email }}</strong>
+            </div>
+
+            <div>
+                <span>Account ID</span>
+                <strong>#{{ current_user.id }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">FITNESS ACTIVITY</p>
+
+        <h2>YOUR ACTIVITY</h2>
+
+        <div class="summary-list">
+
+            <div>
+                <span>Total assessments</span>
+                <strong>{{ assessments|length }}</strong>
+            </div>
+
+            {% if latest %}
+
+            <div>
+                <span>Latest weight</span>
+                <strong>{{ latest.weight }} kg</strong>
+            </div>
+
+            <div>
+                <span>Latest BMI</span>
+                <strong>{{ latest.bmi }}</strong>
+            </div>
+
+            <div>
+                <span>Daily calories</span>
+                <strong>{{ latest.calories }} kcal</strong>
+            </div>
+
+            {% else %}
+
+            <div>
+                <span>Fitness assessment</span>
+                <strong>Not completed</strong>
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

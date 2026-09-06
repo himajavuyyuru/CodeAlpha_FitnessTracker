@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero container">
+  <div class="hero-text">
+    <h1>Your fitness numbers, explained.</h1>
+
+    <p class="hero-sub">
+      Enter your height, weight, and activity level. Fitness Checker works out
+      your BMI, your daily calorie target, and a workout plan that fits your
+      goal — then tracks how it changes over time.
+    </p>
+
+    <div class="hero-actions">
+      <a href="{{ url_for('plan') }}" class="btn btn-primary">
+        Create your plan
+      </a>
+
+      <a href="#how-it-works" class="btn-text">
+        See how it works
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="scoreboard container" aria-label="Example results">
+
+  <div class="stat">
+    <span class="stat-value">22.4</span>
+    <span class="stat-label">BMI</span>
+  </div>
+
+  <div class="stat">
+    <span class="stat-value">2,150</span>
+    <span class="stat-label">Daily calories</span>
+  </div>
+
+  <div class="stat">
+    <span class="stat-value">3</span>
+    <span class="stat-label">Workout days</span>
+  </div>
+
+  <div class="stat">
+    <span class="stat-value">2.7L</span>
+    <span class="stat-label">Water target</span>
+  </div>
+
+  <p class="scoreboard-note">
+    Example results for a 30-year-old, moderately active, aiming to maintain weight.
+  </p>
+
+</section>
+
+
+<section id="how-it-works" class="how container">
+
+  <h2>How it works</h2>
+
+  <ol class="steps">
+
+    <li>
+      <span class="step-num">1</span>
+
+      <div>
+        <h3>Tell us about you</h3>
+        <p>
+          Height, weight, age, activity level, and what you're working toward.
+        </p>
+      </div>
+    </li>
+
+
+    <li>
+      <span class="step-num">2</span>
+
+      <div>
+        <h3>Get your numbers</h3>
+        <p>
+          BMI, calorie needs, and a starting plan, explained in plain language.
+        </p>
+      </div>
+    </li>
+
+
+    <li>
+      <span class="step-num">3</span>
+
+      <div>
+        <h3>Track your progress</h3>
+        <p>
+          Log weight and workouts, and watch the trend as it moves.
+        </p>
+      </div>
+    </li>
+
+  </ol>
+
+</section>
+
+
+<section class="features container">
+
+  <h2>What's included</h2>
+
+  <ul class="feature-list">
+    <li>BMI and body metrics</li>
+    <li>Personalized calorie target</li>
+    <li>Activity-based recommendations</li>
+    <li>Workout suggestions by goal</li>
+    <li>Basic nutrition guidance</li>
+    <li>Progress dashboard with charts</li>
+    <li>A private account for your data</li>
+    <li>Works on your phone or your laptop</li>
+  </ul>
+
+</section>
+
+
+<section class="cta-final container">
+
+  <h2>Ready to see your numbers?</h2>
+
+  <a href="{{ url_for('plan') }}" class="btn btn-primary">
+    Create your plan
+  </a>
+
+</section>
+
+{% endblock %}

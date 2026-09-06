@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Nutrition Plan | Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <div class="dashboard-header">
+
+        <div>
+            <p class="eyebrow">FITNESS CHECKER</p>
+
+            <h1>Nutrition Plan</h1>
+
+            <p class="dashboard-subtitle">
+                Simple nutrition guidance to support your fitness goals.
+            </p>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- DAILY TARGET -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">DAILY TARGET</p>
+
+        <h2>YOUR CALORIE NEEDS</h2>
+
+        {% if latest %}
+
+            <div class="bmi-display">
+                <strong>{{ latest.calories }}</strong>
+            </div>
+
+            <p>
+                Your estimated daily calorie requirement is
+                <strong>{{ latest.calories }} kcal</strong>.
+            </p>
+
+        {% else %}
+
+            <p>
+                Create a fitness assessment first to calculate
+                your estimated daily calorie needs.
+            </p>
+
+            <a href="{{ url_for('plan') }}" class="btn">
+                Create Assessment
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- MEALS -->
+
+    <div class="recommendation-grid">
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">BREAKFAST</p>
+
+            <h2>START STRONG</h2>
+
+            <ul>
+                <li>Oats with fruit</li>
+                <li>Eggs or another protein source</li>
+                <li>Milk or yogurt</li>
+            </ul>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">LUNCH</p>
+
+            <h2>BALANCED MEAL</h2>
+
+            <ul>
+                <li>Rice or whole grains</li>
+                <li>Chicken, fish, eggs, or beans</li>
+                <li>Vegetables or salad</li>
+            </ul>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <p class="eyebrow">DINNER</p>
+
+            <h2>KEEP IT BALANCED</h2>
+
+            <ul>
+                <li>Whole grains or potatoes</li>
+                <li>Lean protein</li>
+                <li>Plenty of vegetables</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEALTHY HABITS -->
+
+    <div class="dashboard-card">
+
+        <p class="eyebrow">DAILY HABITS</p>
+
+        <h2>SMART NUTRITION CHOICES</h2>
+
+        <div class="recommendation-grid">
+
+            <div>
+                <span>🥗</span>
+
+                <h3>EAT BALANCED</h3>
+
+                <p>
+                    Include protein, vegetables, whole grains,
+                    and healthy fats in your meals.
+                </p>
+            </div>
+
+
+            <div>
+                <span>💧</span>
+
+                <h3>DRINK WATER</h3>
+
+                <p>
+                    Stay hydrated throughout the day and drink
+                    water regularly.
+                </p>
+            </div>
+
+
+            <div>
+                <span>🍎</span>
+
+                <h3>CHOOSE WHOLE FOODS</h3>
+
+                <p>
+                    Choose fruits, vegetables, whole grains,
+                    and minimally processed foods more often.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Your Fitness Results - Fitness Checker{% endblock %}
+
+{% block content %}
+
+<section class="container">
+
+    <h1>Your Fitness Results</h1>
+
+    <h2>BMI</h2>
+    <p>Your BMI is <strong>{{ bmi }}</strong></p>
+
+    <h2>Daily Calories</h2>
+    <p>Your estimated daily calorie need is
+        <strong>{{ calories }}</strong> calories.
+    </p>
+
+    <h2>Your Details</h2>
+
+    <p>Age: {{ age }}</p>
+    <p>Height: {{ height }} cm</p>
+    <p>Weight: {{ weight }} kg</p>
+    <p>Activity Level: {{ activity }}</p>
+
+    <br>
+
+    <a href="{{ url_for('plan') }}" class="btn btn-primary">
+        Calculate Again
+    </a>
+
+</section>
+
+{% endblock %}
