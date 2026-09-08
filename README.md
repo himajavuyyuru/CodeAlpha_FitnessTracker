@@ -56,4 +56,5 @@ fitness-checker/
 │   └── workout.html, nutrition.html, water.html, profile.html
 └── instance/
     └── fitness.db              # SQLite database (auto-created, not committed)
-```
+## Live Demo
+https://codealpha-fitnesstracker.onrender.com
